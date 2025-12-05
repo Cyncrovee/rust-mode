@@ -134,6 +134,11 @@ output buffer will be in comint mode, i.e. interactive."
   (interactive)
   (rust--compile nil "%s test %s" rust-cargo-bin rust-cargo-default-arguments))
 
+(defun rust-test-output ()
+  "Test using `cargo test -- --show-output`"
+  (interactive)
+  (rust--compile nil "%s test -- --show-output %s" rust-cargo-bin rust-cargo-default-arguments))
+
 (defun rust-run-clippy ()
   "Run `cargo clippy'."
   (interactive)
