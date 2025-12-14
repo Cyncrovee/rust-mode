@@ -129,16 +129,16 @@ output buffer will be in comint mode, i.e. interactive."
   (interactive "P")
   (rust--compile comint "%s run --release" rust-cargo-bin))
 
-(defun rust-test ()
-  "Test using `cargo test`"
-  (interactive)
-  (rust--compile nil "%s test %s" rust-cargo-bin rust-cargo-default-arguments))
-
-(defun rust-test-args ()
-  "Test using `cargo test`, and pass custom arguments."
-  (interactive)
-  (let ((test-args (read-string "Enter Arguments: ")))
-    (rust--compile nil (concat "%s test " test-args " %s") rust-cargo-bin rust-cargo-default-arguments)))
+(defun rust-test (&optional arg)
+  "Test using `cargo test`.
+If prefixed with `C-u`, pass additional arguments to the command (from a string read from the minibuffer)."
+  (interactive "P")
+  (let ((test-command (if arg
+                          (concat "%s test "
+                            (read-string "Enter Arguments: ") " %s")
+                          "%s test %s"
+                        "%s test %s")))
+    (rust--compile nil test-command rust-cargo-bin rust-cargo-default-arguments)))
 
 (defun rust-run-clippy ()
   "Run `cargo clippy'."
