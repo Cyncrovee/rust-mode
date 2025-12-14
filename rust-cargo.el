@@ -134,7 +134,7 @@ output buffer will be in comint mode, i.e. interactive."
   (interactive)
   (rust--compile nil "%s test %s" rust-cargo-bin rust-cargo-default-arguments))
 
-(defun rust-test-with-args ()
+(defun rust-test-args ()
   "Test using `cargo test`, and pass custom arguments."
   (interactive)
   (let ((test-args (read-string "Enter Arguments: ")))
